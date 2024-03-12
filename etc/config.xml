@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <shipmondo>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Salecto\Shipmondo\Model\Carrier\Shipmondo</model>
+                <name>Shipmondo</name>
+                <title>Shipmondo</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </shipmondo>
+        </carriers>
+    </default>
+</config>

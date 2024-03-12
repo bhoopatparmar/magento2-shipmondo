@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Salecto\Shipmondo\Api\Carrier\ShipmondoInterface" type="Salecto\Shipmondo\Model\Carrier\Shipmondo"/>
+    <preference for="Salecto\Shipmondo\Api\Data\ParcelShopInterface" type="Salecto\Shipmondo\Model\Data\ParcelShop"/>
+
+    <type name="Salecto\Shipmondo\Model\MethodType\ParcelShop">
+        <arguments>
+            <argument name="parcelShopClass" xsi:type="string">Salecto\Shipmondo\Api\Data\ParcelShopInterface</argument>
+        </arguments>
+    </type>
+
+    <type name="Salecto\Shipping\Model\ComponentManagement">
+        <arguments>
+            <argument name="carriers" xsi:type="array">
+                <item name="shipmondo" xsi:type="object">Salecto\Shipmondo\Model\Carrier\Shipmondo</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Salecto\Shipmondo\Model\Carrier\Shipmondo">
+        <arguments>
+            <argument name="defaultMethodTypeHandler" xsi:type="object">Salecto\Shipmondo\Model\MethodType\Address</argument>
+            <argument name="methodTypeHandlers" xsi:type="array">
+                <item name="bring_delivery" xsi:type="array">
+                    <item name="label" xsi:type="string">Bring | Delivery</item>
+                    <item name="shipmondo_code" xsi:type="string">bring</item>
+                </item>
+                <item name="bring_pickup" xsi:type="array">
+                    <item name="label" xsi:type="string">Bring | Pickup</item>
+                    <item name="type" xsi:type="object">Salecto\Shipmondo\Model\MethodType\ParcelShop</item>
+                    <item name="shipmondo_code" xsi:type="string">bring</item>
+                </item>
+                <item name="dao_delivery" xsi:type="array">
+                    <item name="label" xsi:type="string">DAO | Delivery</item>
+                    <item name="shipmondo_code" xsi:type="string">dao</item>
+                </item>
+                <item name="dao_pickup" xsi:type="array">
+                    <item name="label" xsi:type="string">DAO | Pickup</item>
+                    <item name="type" xsi:type="object">Salecto\Shipmondo\Model\MethodType\ParcelShop</item>
+                    <item name="shipmondo_code" xsi:type="string">dao</item>
+                </item>
+                <item name="gls_delivery" xsi:type="array">
+                    <item name="label" xsi:type="string">GLS | Delivery</item>
+                    <item name="shipmondo_code" xsi:type="string">gls</item>
+                </item>
+                <item name="gls_pickup" xsi:type="array">
+                    <item name="label" xsi:type="string">GLS | Pickup</item>
+                    <item name="type" xsi:type="object">Salecto\Shipmondo\Model\MethodType\ParcelShop</item>
+                    <item name="shipmondo_code" xsi:type="string">gls</item>
+                </item>
+                <item name="pdk_delivery" xsi:type="array">
+                    <item name="label" xsi:type="string">PostNord | Delivery</item>
+                    <item name="shipmondo_code" xsi:type="string">pdk</item>
+                </item>
+                <item name="pdk_pickup" xsi:type="array">
+                    <item name="label" xsi:type="string">PostNord | Pickup</item>
+                    <item name="type" xsi:type="object">Salecto\Shipmondo\Model\MethodType\ParcelShop</item>
+                    <item name="shipmondo_code" xsi:type="string">pdk</item>
+                </item>
+                <item name="dfm_delivery" xsi:type="array">
+                    <item name="label" xsi:type="string">Danske Fragtmænd | Delivery</item>
+                    <item name="shipmondo_code" xsi:type="string">dfm</item>
+                </item>
+                <item name="dhl_pickup" xsi:type="array">
+                    <item name="label" xsi:type="string">DHL | Pickup</item>
+                    <item name="shipmondo_code" xsi:type="string">dhl_express</item>
+                </item>
+                <item name="uns_parcel" xsi:type="array">
+                    <item name="label" xsi:type="string">Flatrate | Pickup</item>
+                    <item name="shipmondo_code" xsi:type="string">uns</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Salecto\Shipmondo\Model\Api">
+        <arguments>
+            <argument name="shipmondo" xsi:type="object">Salecto\Shipmondo\Model\Carrier\Shipmondo\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Salecto\Shipmondo\Model\Carrier\Shipmondo">
+        <arguments>
+            <argument name="api" xsi:type="object">Salecto\Shipmondo\Model\Api\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="wexo_shipping_additional_data" type="Salecto\Shipmondo\Plugins\Sales\ShippingAdditionalDataPlugin"/>
+    </type>
+    <type name="Salecto\Shipmondo\Plugins\Sales\ShippingAdditionalDataPlugin">
+        <arguments>
+            <argument name="parcelShopClass" xsi:type="string">Salecto\Shipmondo\Api\Data\ParcelShopInterface</argument>
+        </arguments>
+    </type>
+</config>

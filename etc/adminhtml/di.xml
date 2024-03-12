@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Salecto\Shipping\Model\Layout\AdminhtmlLayoutProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="wexoShipmondo" xsi:type="object">Salecto\Shipmondo\Model\Layout\AdminhtmlShipmondoProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

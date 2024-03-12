@@ -1,0 +1,26 @@
+{
+	"name": "bhoopatparmar/magento2-shipmondo",
+	"description": "Shipmondo component for Salecto Shipping",
+	"type": "magento2-module",
+	"version": "1.0.0",
+	"replace": {
+		"wexo/module-shipmondo": "*"
+	},
+	"require": {
+		"php": "~7.4.0|~8.1.0",
+		"bhoopatparmar/magento2-shipping": "dev-master",
+		"shipmondo/shipmondo_php_sdk": "*"
+	},
+	"license": [
+		"OSL-3.0",
+		"AFL-3.0"
+	],
+	"autoload": {
+		"files": [
+			"registration.php"
+		],
+		"psr-4": {
+			"Salecto\\Shipmondo\\": ""
+		}
+	}
+}
